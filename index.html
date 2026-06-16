@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guidepost Media — Premium Digital Presence for Local Restaurants</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #080C14;
+  --paper: #F5F2EC;
+  --blue: #1246C8;
+  --blue-mid: #2563EB;
+  --blue-light: #93B4FF;
+  --accent: #FFD600;
+  --green: #00C566;
+  --white: #ffffff;
+  --gray: #6B7280;
+  --gray-light: #F9F7F3;
+  --border: rgba(0,0,0,0.08);
+  --recur: #7C3AED;
+  --recur-light: #C4B5FD;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(245,242,236,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--ink); }
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink); color: var(--accent);
+  font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+  letter-spacing: 2px; padding: 0.6rem 1.4rem;
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue); color: var(--white); }
+.lang-toggle { display: flex; gap: 2px; background: var(--ink); padding: 3px; }
+.lang-btn { border: none; background: transparent; padding: 3px 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: rgba(255,255,255,0.4); font-family: 'DM Mono', monospace; }
+.lang-btn.active { background: var(--accent); color: var(--ink); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+  gap: 4rem;
+}
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: saturate(0.5);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(8,12,20,0.88) 0%, rgba(8,12,20,0.55) 50%, rgba(8,12,20,0.82) 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 1; opacity: 0.03;
+  background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.hero-left { position: relative; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem;
+}
+.hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+.hero h1 span { color: var(--accent); }
+.hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px; font-weight: 300; }
+.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+  letter-spacing: 2px; padding: 0.9rem 2rem;
+  text-decoration: none; transition: all 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--white); }
+.btn-secondary {
+  background: transparent; color: var(--white);
+  font-size: 0.9rem; font-weight: 500;
+  padding: 0.9rem 2rem; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.2s; display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--white); }
+.hero-right { position: relative; }
+.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); }
+.hero-stat { background: rgba(255,255,255,0.04); padding: 1.5rem; }
+.hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--accent); line-height: 1; }
+.hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 4px; font-weight: 300; }
+.hero-price-badge {
+  background: var(--accent); color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+  letter-spacing: 2px; padding: 0.75rem 1.5rem;
+  text-align: center; margin-bottom: 1px;
+}
+
+/* TICKER */
+.ticker-wrap { background: var(--blue); padding: 0.75rem 0; overflow: hidden; }
+.ticker { display: flex; gap: 0; animation: tick 20s linear infinite; white-space: nowrap; }
+.ticker-item { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px; color: var(--white); padding: 0 2rem; opacity: 0.7; }
+.ticker-item span { color: var(--accent); margin-right: 2rem; }
+@keyframes tick { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* SECTIONS */
+.section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 1rem;
+}
+.section-tag::before { content: ''; width: 24px; height: 1px; background: var(--blue); }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 0.95; letter-spacing: 1px; margin-bottom: 1rem; }
+.section-sub { font-size: 1rem; color: var(--gray); max-width: 560px; line-height: 1.7; font-weight: 300; }
+
+/* WHO WE HELP */
+.who-section { background: var(--white); padding: 5rem 2rem; }
+.who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); margin-top: 3rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.who-card { background: var(--white); padding: 2rem; transition: background 0.2s; cursor: default; }
+.who-card:hover { background: var(--ink); }
+.who-card:hover .who-icon { filter: grayscale(0); }
+.who-card:hover .who-name { color: var(--accent); }
+.who-card:hover .who-desc { color: rgba(255,255,255,0.5); }
+.who-card:hover .who-price { color: var(--white); }
+.who-icon { font-size: 2.5rem; margin-bottom: 1rem; transition: all 0.2s; }
+.who-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 0.5rem; transition: color 0.2s; }
+.who-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.5; margin-bottom: 1rem; font-weight: 300; transition: color 0.2s; }
+.who-price { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--blue); transition: color 0.2s; }
+
+/* DEMO */
+.demo-section { background: var(--ink); padding: 5rem 2rem; }
+.demo-section .section-tag { color: var(--accent); }
+.demo-section .section-tag::before { background: var(--accent); }
+.demo-section .section-title { color: var(--white); }
+.demo-section .section-sub { color: rgba(255,255,255,0.4); }
+.demo-tabs { display: flex; gap: 1px; margin: 2rem 0 1.5rem; background: rgba(255,255,255,0.1); max-width: 1200px; margin-left: auto; margin-right: auto; }
+.demo-tab { flex: 1; padding: 0.85rem; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 2px; border: none; background: transparent; color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.2s; text-align: center; }
+.demo-tab.active { background: var(--accent); color: var(--ink); }
+.demo-embed { max-width: 1200px; margin: 0 auto; position: relative; }
+.demo-embed iframe { width: 100%; height: 560px; border: none; display: block; }
+.demo-badge { position: absolute; top: 16px; left: 16px; background: rgba(8,12,20,0.85); color: var(--accent); font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; padding: 6px 12px; backdrop-filter: blur(8px); }
+
+/* STATS */
+.stats-section { background: var(--blue); padding: 4rem 2rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); max-width: 1200px; margin: 0 auto; }
+.stat-block { background: var(--blue); padding: 2rem; text-align: center; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--accent); line-height: 1; }
+.stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 6px; font-weight: 300; }
+
+/* HOW IT WORKS */
+.how-section { padding: 5rem 2rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); margin-top: 3rem; }
+.step { background: var(--paper); padding: 2rem; }
+.step-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(0,0,0,0.06); line-height: 1; margin-bottom: 1rem; }
+.step-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+.step-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+
+/* PRICING */
+.pricing-section { background: var(--ink); padding: 5rem 2rem; }
+.pricing-section .section-tag { color: var(--accent); }
+.pricing-section .section-tag::before { background: var(--accent); }
+.pricing-section .section-title { color: var(--white); }
+.pricing-section .section-sub { color: rgba(255,255,255,0.4); }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08); margin-top: 3rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.price-card { background: rgba(255,255,255,0.03); padding: 2rem; transition: background 0.2s; }
+.price-card.featured { background: var(--accent); }
+.price-card:hover:not(.featured) { background: rgba(255,255,255,0.07); }
+.price-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.price-name { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem; }
+.price-card.featured .price-name { color: rgba(0,0,0,0.4); }
+.price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--white); line-height: 1; margin-bottom: 0.25rem; }
+.price-card.featured .price-amount { color: var(--ink); }
+.price-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-bottom: 1.5rem; font-weight: 300; }
+.price-card.featured .price-note { color: rgba(0,0,0,0.4); }
+.price-features { list-style: none; }
+.price-features li { font-size: 0.85rem; padding: 5px 0; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 8px; font-weight: 300; }
+.price-card.featured .price-features li { color: rgba(0,0,0,0.7); }
+.price-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.price-card.featured .price-features li::before { color: var(--ink); }
+.no-fee-banner { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 1rem 2rem; text-align: center; margin-top: 1px; max-width: 1200px; margin-left: auto; margin-right: auto; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 2px; color: rgba(255,255,255,0.3); }
+.no-fee-banner span { color: var(--accent); }
+
+/* AI AGENT RECURRING SECTION */
+.agent-section { background: var(--paper); padding: 5rem 2rem; position: relative; overflow: hidden; }
+.agent-wrap { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.agent-card {
+  background: var(--ink);
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 0; overflow: hidden; position: relative;
+  border: 1px solid rgba(124,58,237,0.3);
+}
+.agent-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 0% 0%, rgba(124,58,237,0.25), transparent 55%);
+  pointer-events: none;
+}
+.agent-left { padding: 3rem; position: relative; z-index: 1; }
+.agent-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--recur); color: var(--white);
+  font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 14px; margin-bottom: 1.5rem;
+}
+.agent-left h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--white); line-height: 1.05; letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+.agent-left h3 span { color: var(--recur-light); }
+.agent-desc { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.7; font-weight: 300; margin-bottom: 2rem; max-width: 440px; }
+.agent-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 0.5rem; }
+.agent-price { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: var(--white); line-height: 1; }
+.agent-price-period { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: rgba(255,255,255,0.4); }
+.agent-price-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-bottom: 2rem; font-weight: 300; }
+.agent-cta {
+  display: inline-block; background: var(--recur); color: var(--white);
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem;
+  letter-spacing: 2px; padding: 0.9rem 2.2rem;
+  text-decoration: none; transition: background 0.2s;
+}
+.agent-cta:hover { background: var(--recur-light); color: var(--ink); }
+.agent-right { background: rgba(255,255,255,0.03); padding: 3rem; position: relative; z-index: 1; border-left: 1px solid rgba(255,255,255,0.08); }
+.agent-feature-list { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
+.agent-feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.75); font-weight: 300; line-height: 1.4; }
+.agent-feature-icon { flex-shrink: 0; width: 22px; height: 22px; background: rgba(124,58,237,0.2); color: var(--recur-light); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; margin-top: 1px; }
+.agent-feature-list strong { color: var(--white); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .agent-card { grid-template-columns: 1fr; }
+  .agent-right { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); }
+  .agent-left, .agent-right { padding: 2rem; }
+}
+
+/* ROI */
+.roi-section { background: var(--white); padding: 5rem 2rem; }
+.roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); margin-top: 3rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.roi-card { background: var(--white); padding: 2rem; border-top: 3px solid var(--border); transition: border-color 0.2s; }
+.roi-card:hover { border-color: var(--blue); }
+.roi-business { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; }
+.roi-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.roi-extra { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--green); line-height: 1; }
+.roi-extra-label { font-size: 0.75rem; color: var(--gray); margin-top: 2px; font-weight: 300; }
+.roi-multiplier { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; background: var(--ink); color: var(--accent); padding: 4px 10px; display: inline-block; margin-top: 0.75rem; letter-spacing: 1px; }
+
+/* ABOUT */
+.about-section { padding: 5rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+.about-visual { background: var(--ink); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.about-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(18,70,200,0.4), transparent 60%); }
+.about-initials { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; color: rgba(255,255,255,0.08); position: relative; }
+.about-name { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; }
+.about-name-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); letter-spacing: 2px; }
+.about-name-sub { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 300; margin-top: 2px; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem; }
+.about-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; padding: 4px 10px; background: var(--ink); color: var(--white); letter-spacing: 1px; }
+
+/* CONTACT */
+.contact-section { background: var(--blue); padding: 5rem 2rem; }
+.contact-section .section-tag { color: var(--accent); }
+.contact-section .section-tag::before { background: var(--accent); }
+.contact-section .section-title { color: var(--white); }
+.contact-section .section-sub { color: rgba(255,255,255,0.5); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); margin-top: 3rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.contact-card { background: rgba(255,255,255,0.05); padding: 1.5rem; transition: background 0.2s; }
+.contact-card:hover { background: rgba(255,255,255,0.12); }
+.contact-icon { font-size: 1.2rem; margin-bottom: 0.75rem; }
+.contact-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+.contact-value { font-size: 0.95rem; color: var(--white); font-weight: 400; }
+.contact-value a { color: var(--white); text-decoration: none; }
+
+/* FOOTER */
+footer { background: var(--ink); padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--white); }
+.footer-logo span { color: var(--accent); }
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.hero-tag { animation: fadeUp 0.5s 0.1s both; }
+.hero h1 { animation: fadeUp 0.5s 0.2s both; }
+.hero-sub { animation: fadeUp 0.5s 0.3s both; }
+.hero-buttons { animation: fadeUp 0.5s 0.4s both; }
+.hero-right { animation: fadeUp 0.5s 0.5s both; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 1rem; }
+  .nav-links { display: none; }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 6rem 1.5rem 3rem;
+    gap: 2rem;
+    min-height: 100svh;
+  }
+  .hero-video-bg video {
+    opacity: 0.25;
+  }
+  .hero h1 { font-size: 3.2rem; }
+  .hero-right { display: none; }
+  .hero-sub { font-size: 0.95rem; }
+  .about-section { grid-template-columns: 1fr; gap: 2rem; }
+  .who-grid .who-card { grid-template-columns: 1fr !important; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .demo-tabs { flex-wrap: wrap; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Guidepost<span>Media</span></div>
+  <div class="nav-links">
+    <a href="#demo" data-en="Live Demo" data-es="Demo en Vivo">Live Demo</a>
+    <a href="#agent" data-en="AI Agent" data-es="Agente IA">AI Agent</a>
+    <a href="#pricing" data-en="Pricing" data-es="Precios">Pricing</a>
+    <a href="#about" data-en="About" data-es="Nosotros">About</a>
+    <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-en="GET STARTED" data-es="COMENZAR">GET STARTED</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video-bg">
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+      <source src="restaurant.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-left" style="position:relative;z-index:2;">
+    <div class="hero-tag" data-en="Fresno & Visalia, CA" data-es="Fresno y Visalia, CA">Fresno & Visalia, CA</div>
+    <h1 data-en="Make Your<br>Restaurant Look<br><span>Premium</span><br>On Google." data-es="Haz Que Tu<br>Restaurante Se Vea<br><span>Premium</span><br>En Google.">Make Your<br>Restaurant Look<br><span>Premium</span><br>On Google.</h1>
+    <p class="hero-sub" data-en="Professional photos, 3D virtual tour, and a digital menu that keeps customers coming back — all in one visit. Your competitors won't know what hit them." data-es="Fotos profesionales, tour virtual 3D y un menú digital que hace que los clientes regresen — todo en una visita. Tu competencia no sabrá qué los golpeó.">Professional photos, 3D virtual tour, and a digital menu that keeps customers coming back — all in one visit. Your competitors won't know what hit them.</p>
+    <div class="hero-buttons">
+      <a href="#demo" class="btn-primary" data-en="SEE LIVE EXAMPLE" data-es="VER EJEMPLO EN VIVO">SEE LIVE EXAMPLE</a>
+      <a href="#contact" class="btn-secondary" data-en="Book a Visit" data-es="Agendar Visita">Book a Visit</a>
+    </div>
+  </div>
+  <div class="hero-right" style="position:relative;z-index:2;">
+    <div class="hero-price-badge" data-en="COMPLETE PACKAGE — ONE TIME PAYMENT" data-es="PAQUETE COMPLETO — PAGO ÚNICO">COMPLETE PACKAGE — ONE TIME PAYMENT</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">$139.99</div>
+        <div class="hero-stat-label" data-en="Starting price — no monthly fees" data-es="Precio desde — sin tarifas mensuales">Starting price — no monthly fees</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">30</div>
+        <div class="hero-stat-label" data-en="Minutes — in and out" data-es="Minutos — rápido y eficiente">Minutes — in and out</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">42%</div>
+        <div class="hero-stat-label" data-en="More profile clicks on Google" data-es="Más clics en tu perfil de Google">More profile clicks on Google</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24h</div>
+        <div class="hero-stat-label" data-en="Until your profile looks premium" data-es="Hasta que tu perfil se vea premium">Until your profile looks premium</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">RESTAURANTS <span>✦</span></span>
+    <span class="ticker-item">FOOD TRUCKS <span>✦</span></span>
+    <span class="ticker-item">TAQUERIAS <span>✦</span></span>
+    <span class="ticker-item">CAFES <span>✦</span></span>
+    <span class="ticker-item">LOCAL EATERIES <span>✦</span></span>
+    <span class="ticker-item">RESTAURANTS <span>✦</span></span>
+    <span class="ticker-item">FOOD TRUCKS <span>✦</span></span>
+    <span class="ticker-item">TAQUERIAS <span>✦</span></span>
+    <span class="ticker-item">CAFES <span>✦</span></span>
+    <span class="ticker-item">LOCAL EATERIES <span>✦</span></span>
+  </div>
+</div>
+
+<!-- WHO WE HELP -->
+<div class="who-section">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <div class="section-tag" data-en="Who we help" data-es="A quién ayudamos">Who we help</div>
+    <h2 class="section-title" data-en="Every local business<br>deserves to look premium." data-es="Cada negocio local<br>merece verse premium.">Every local business<br>deserves to look premium.</h2>
+    <p class="section-sub" data-en="If customers search for you on Google — you need this." data-es="Si los clientes te buscan en Google — necesitas esto.">If customers search for you on Google — you need this.</p>
+  </div>
+  <div class="who-grid">
+    <div class="who-card" style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:3rem;">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:0.95;letter-spacing:1px;" data-en="If customers search for you on Google — you need this." data-es="Si los clientes te buscan en Google — necesitas esto.">If customers search for you on Google — you need this.</div>
+        <a href="#contact" style="display:inline-block;margin-top:1.5rem;background:var(--ink);color:var(--accent);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;padding:0.75rem 1.75rem;text-decoration:none;" data-en="GET STARTED — $139.99" data-es="COMENZAR — $139.99">GET STARTED — $139.99</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
+        <div style="background:white;padding:1.25rem;">
+          <div style="font-size:0.65rem;font-family:'DM Mono',monospace;letter-spacing:2px;color:var(--gray);margin-bottom:6px;">RESTAURANTS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--green);">67%</div>
+          <div style="font-size:0.75rem;color:var(--gray);font-weight:300;" data-en="want to see inside before visiting" data-es="quieren ver antes de visitar">want to see inside before visiting</div>
+        </div>
+        <div style="background:white;padding:1.25rem;">
+          <div style="font-size:0.65rem;font-family:'DM Mono',monospace;letter-spacing:2px;color:var(--gray);margin-bottom:6px;">FOOD TRUCKS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--green);">85%</div>
+          <div style="font-size:0.75rem;color:var(--gray);font-weight:300;" data-en="search Google before choosing" data-es="buscan en Google antes de elegir">search Google before choosing</div>
+        </div>
+        <div style="background:white;padding:1.25rem;">
+          <div style="font-size:0.65rem;font-family:'DM Mono',monospace;letter-spacing:2px;color:var(--gray);margin-bottom:6px;">TAQUERIAS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--green);">76%</div>
+          <div style="font-size:0.75rem;color:var(--gray);font-weight:300;" data-en="check Maps before trying somewhere new" data-es="revisan Maps antes de probar algo nuevo">check Maps before trying somewhere new</div>
+        </div>
+        <div style="background:white;padding:1.25rem;">
+          <div style="font-size:0.65rem;font-family:'DM Mono',monospace;letter-spacing:2px;color:var(--gray);margin-bottom:6px;">REPEAT CUSTOMERS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--green);">90%</div>
+          <div style="font-size:0.75rem;color:var(--gray);font-weight:300;" data-en="more likely to return with a loyalty program" data-es="más probable que regresen con un programa de lealtad">more likely to return with a loyalty program</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-block">
+      <div class="stat-num">42%</div>
+      <div class="stat-label" data-en="More clicks on your Google profile" data-es="Más clics en tu perfil de Google">More clicks on your Google profile</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">35%</div>
+      <div class="stat-label" data-en="More requests for directions" data-es="Más solicitudes de direcciones">More requests for directions</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">29%</div>
+      <div class="stat-label" data-en="More direct phone calls" data-es="Más llamadas directas">More direct phone calls</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">3X</div>
+      <div class="stat-label" data-en="More reservations with a 3D tour" data-es="Más reservaciones con un tour 3D">More reservations with a 3D tour</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div style="background:var(--paper);padding:5rem 2rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag" data-en="Real Results" data-es="Resultados Reales">Real Results</div>
+    <h2 class="section-title" data-en="Real businesses.<br>Real results.<br>Zero ads." data-es="Negocios reales.<br>Resultados reales.<br>Cero anuncios.">Real businesses.<br>Real results.<br>Zero ads.</h2>
+    <p class="section-sub" style="margin-bottom:3rem;" data-en="One Matterport 3D Dollhouse tour uploaded to Google Maps. No ads. No budget. Just Google Maps doing its job." data-es="Un tour 3D Dollhouse de Matterport subido a Google Maps. Sin anuncios. Sin presupuesto. Solo Google Maps haciendo su trabajo.">One Matterport 3D Dollhouse tour uploaded to Google Maps. No ads. No budget. Just Google Maps doing its job.</p>
+
+    <!-- TWO RESULTS SIDE BY SIDE -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+
+      <!-- RESULT 1 — El San Marcos -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="position:relative;">
+          <img src="views_proof.jpg" alt="4565 views El San Marcos" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+          <div style="position:absolute;top:12px;left:12px;background:var(--accent);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;padding:4px 12px;">REAL RESULT</div>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:var(--gray);margin-bottom:0.5rem;">EL SAN MARCOS · VISALIA, CA</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--ink);line-height:1;">4,565</div>
+          <div style="font-size:0.85rem;color:var(--gray);font-weight:300;margin-bottom:1rem;" data-en="views in ONE week · $0 in ads" data-es="vistas en UNA semana · $0 en anuncios">views in ONE week · $0 in ads</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
+            <div style="background:white;padding:0.75rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--green);">$0</div>
+              <div style="font-size:0.65rem;color:var(--gray);" data-en="ads spent" data-es="en anuncios">ads spent</div>
+            </div>
+            <div style="background:white;padding:0.75rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--green);">7</div>
+              <div style="font-size:0.65rem;color:var(--gray);" data-en="days" data-es="días">days</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULT 2 — Lalo's Taqueria -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="position:relative;">
+          <img src="lalos_proof.jpg" alt="1057 views Lalo's Taqueria" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+          <div style="position:absolute;top:12px;left:12px;background:var(--accent);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;padding:4px 12px;">REAL RESULT</div>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:var(--gray);margin-bottom:0.5rem;">LALO'S TAQUERIA · FRESNO, CA</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--ink);line-height:1;">1,057</div>
+          <div style="font-size:0.85rem;color:var(--gray);font-weight:300;margin-bottom:1rem;" data-en="views in ONE day · $0 in ads" data-es="vistas en UN día · $0 en anuncios">views in ONE day · $0 in ads</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
+            <div style="background:white;padding:0.75rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--green);">$0</div>
+              <div style="font-size:0.65rem;color:var(--gray);" data-en="ads spent" data-es="en anuncios">ads spent</div>
+            </div>
+            <div style="background:white;padding:0.75rem;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--green);">1</div>
+              <div style="font-size:0.65rem;color:var(--gray);" data-en="day" data-es="día">day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;">
+      <a href="#contact" style="display:inline-block;background:var(--ink);color:var(--accent);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;padding:0.85rem 2.5rem;text-decoration:none;" data-en="GET THIS FOR YOUR BUSINESS" data-es="OBTÉN ESTO PARA TU NEGOCIO">GET THIS FOR YOUR BUSINESS</a>
+    </div>
+  </div>
+</div>
+
+<section class="demo-section" id="demo">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag" data-en="Live Examples" data-es="Ejemplos en Vivo">Live Examples</div>
+    <h2 class="section-title" style="color:white;" data-en="See the difference<br>for yourself." data-es="Ve la diferencia<br>tú mismo.">See the difference<br>for yourself.</h2>
+    <p class="section-sub" data-en="Click and drag to explore. This is exactly what customers see on Google Maps." data-es="Haz clic y arrastra para explorar. Esto es exactamente lo que los clientes ven en Google Maps.">Click and drag to explore. This is exactly what customers see on Google Maps.</p>
+  </div>
+  <div class="demo-tabs">
+    <button class="demo-tab active" onclick="showDemo('restaurant')">🍽️ <span data-en="RESTAURANT" data-es="RESTAURANTE">RESTAURANT</span></button>
+    <button class="demo-tab" onclick="showDemo('house')">🏠 <span data-en="RESIDENTIAL" data-es="RESIDENCIAL">RESIDENTIAL</span></button>
+  </div>
+  <div class="demo-embed" id="demo-restaurant">
+    <div class="demo-badge">🔴 LIVE — VISALIA, CA</div>
+    <iframe src="https://my.matterport.com/show/?m=FiwjSptiZNK" allowfullscreen allow="xr-spatial-tracking"></iframe>
+  </div>
+  <div class="demo-embed" id="demo-house" style="display:none;">
+    <div class="demo-badge">🔴 LIVE — VISALIA, CA</div>
+    <iframe src="https://my.matterport.com/show/?m=fREtr92thXN" allowfullscreen allow="xr-spatial-tracking"></iframe>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section">
+    <div class="section-tag" data-en="The Process" data-es="El Proceso">The Process</div>
+    <h2 class="section-title" data-en="Done in 30 minutes.<br>Live on Google tonight." data-es="Listo en 30 minutos.<br>En Google esta noche.">Done in 30 minutes.<br>Live on Google tonight.</h2>
+  </div>
+  <div class="steps" style="max-width:1200px;margin:0 auto;">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title" data-en="We visit your business" data-es="Visitamos tu negocio">We visit your business</div>
+      <div class="step-desc" data-en="We come to you — no need to go anywhere. We can visit any time that works for you, including before you open." data-es="Vamos a ti — no necesitas ir a ningún lado. Podemos visitarte en cualquier momento, incluso antes de abrir.">We come to you — no need to go anywhere. We can visit any time that works for you, including before you open.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title" data-en="Professional photos" data-es="Fotos profesionales">Professional photos</div>
+      <div class="step-desc" data-en="20+ high-quality photos of your interior, exterior and best details. Edited and ready to impress." data-es="20+ fotos de alta calidad de tu interior, exterior y mejores detalles. Editadas y listas para impresionar.">20+ high-quality photos of your interior, exterior and best details. Edited and ready to impress.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title" data-en="3D virtual tour" data-es="Tour virtual 3D">3D virtual tour</div>
+      <div class="step-desc" data-en="Customers walk through your entire space from their phone. Powered by Matterport — the industry standard." data-es="Los clientes recorren todo tu espacio desde su teléfono. Powered by Matterport — el estándar de la industria.">Customers walk through your entire space from their phone. Powered by Matterport — the industry standard.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title" data-en="Google Maps updated" data-es="Google Maps actualizado">Google Maps updated</div>
+      <div class="step-desc" data-en="Everything uploaded to your Google profile tonight. By tomorrow morning — you look premium." data-es="Todo subido a tu perfil de Google esta noche. Para mañana en la mañana — te ves premium.">Everything uploaded to your Google profile tonight. By tomorrow morning — you look premium.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag" data-en="Pricing" data-es="Precios">Pricing</div>
+    <h2 class="section-title" style="color:white;" data-en="One price.<br>No surprises.<br>No monthly fees." data-es="Un precio.<br>Sin sorpresas.<br>Sin tarifas mensuales.">One price.<br>No surprises.<br>No monthly fees.</h2>
+    <p class="section-sub" data-en="You make back your investment with just ONE new customer." data-es="Recuperas tu inversión con tan solo UN nuevo cliente.">You make back your investment with just ONE new customer.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-icon">📸</div>
+      <div class="price-name" data-en="Google Maps Package" data-es="Paquete Google Maps">Google Maps Package</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:rgba(255,255,255,0.3);text-decoration:line-through;">$200</div>
+        <div style="background:var(--accent);color:var(--ink);font-family:'DM Mono',monospace;font-size:0.65rem;font-weight:600;padding:3px 8px;letter-spacing:1px;">LAUNCH DEAL</div>
+      </div>
+      <div class="price-amount">$139.99</div>
+      <div class="price-note" data-en="Limited time — one time payment" data-es="Tiempo limitado — pago único">Limited time — one time payment</div>
+      <ul class="price-features">
+        <li data-en="20+ professional photos" data-es="20+ fotos profesionales">20+ professional photos</li>
+        <li data-en="Uploaded to Google Maps" data-es="Subidas a Google Maps">Uploaded to Google Maps</li>
+        <li data-en="Dollhouse GIF — first thing customers see" data-es="GIF Dollhouse — lo primero que ven">Dollhouse GIF — first thing customers see</li>
+        <li data-en="60-second video for social media" data-es="Video de 60 seg para redes">60-second video for social media</li>
+        <li data-en="Done in 30 minutes" data-es="Listo en 30 minutos">Done in 30 minutes</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <div class="price-icon">🏆</div>
+      <div class="price-name" data-en="⭐ Full Premium Package" data-es="⭐ Paquete Premium Completo">⭐ Full Premium Package</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:rgba(0,0,0,0.3);text-decoration:line-through;">$300</div>
+        <div style="background:var(--ink);color:var(--accent);font-family:'DM Mono',monospace;font-size:0.65rem;font-weight:600;padding:3px 8px;letter-spacing:1px;">BEST VALUE</div>
+      </div>
+      <div class="price-amount" style="color:var(--ink);">$239.99</div>
+      <div class="price-note" data-en="Most popular — best value" data-es="Más popular — mejor valor">Most popular — best value</div>
+      <ul class="price-features">
+        <li data-en="Everything in Google Maps Package" data-es="Todo el paquete Google Maps">Everything in Google Maps Package</li>
+        <li data-en="Full Matterport 3D virtual tour" data-es="Tour virtual 3D completo con Matterport">Full Matterport 3D virtual tour</li>
+        <li data-en="Customers walk through your space" data-es="Clientes recorren tu espacio">Customers walk through your space</li>
+        <li data-en="Shareable link — any device" data-es="Link compartible — cualquier dispositivo">Shareable link — any device</li>
+        <li data-en="You own the tour — no monthly fees" data-es="Tú eres dueño del tour — sin tarifas">You own the tour — no monthly fees</li>
+      </ul>
+    </div>
+  </div>
+  <div class="no-fee-banner">
+    <span data-en="ONE TIME PAYMENT" data-es="PAGO ÚNICO">ONE TIME PAYMENT</span> · <span style="color:rgba(255,255,255,0.3)" data-en="NO MONTHLY FEES" data-es="SIN TARIFAS MENSUALES">NO MONTHLY FEES</span> · <span data-en="YOU OWN EVERYTHING" data-es="TÚ ERES DUEÑO DE TODO">YOU OWN EVERYTHING</span>
+  </div>
+</section>
+
+<!-- AI LOYALTY AGENT — RECURRING -->
+<section class="agent-section" id="agent">
+  <div class="agent-wrap">
+    <div class="section-tag" data-en="New — Recurring Revenue Tool" data-es="Nuevo — Herramienta Recurrente">New — Recurring Revenue Tool</div>
+    <h2 class="section-title" data-en="Turn first-time<br>diners into<br>repeat customers." data-es="Convierte clientes<br>nuevos en<br>clientes recurrentes.">Turn first-time<br>diners into<br>repeat customers.</h2>
+    <p class="section-sub" style="margin-bottom:3rem;" data-en="A digital menu with QR code, plus an AI agent that keeps customers coming back — automatically." data-es="Un menú digital con código QR, más un agente de IA que hace que los clientes regresen — automáticamente.">A digital menu with QR code, plus an AI agent that keeps customers coming back — automatically.</p>
+    <div class="agent-card">
+      <div class="agent-left">
+        <div class="agent-badge" data-en="AI Loyalty Agent + Digital Menu" data-es="Agente IA de Lealtad + Menú Digital">AI Loyalty Agent + Digital Menu</div>
+        <h3 data-en="Your menu, upgraded.<br>Your customers, <span>retained.</span>" data-es="Tu menú, mejorado.<br>Tus clientes, <span>retenidos.</span>">Your menu, upgraded.<br>Your customers, <span>retained.</span></h3>
+        <p class="agent-desc" data-en="A fast, beautiful digital menu customers scan at the table — paired with an AI agent that remembers them, sends offers, and brings them back for seconds." data-es="Un menú digital rápido y atractivo que los clientes escanean en la mesa — junto con un agente de IA que los recuerda, envía ofertas y los hace regresar.">A fast, beautiful digital menu customers scan at the table — paired with an AI agent that remembers them, sends offers, and brings them back for seconds.</p>
+        <div class="agent-price-row">
+          <div class="agent-price">$150</div>
+          <div class="agent-price-period" data-en="/ month per location" data-es="/ mes por sucursal">/ month per location</div>
+        </div>
+        <div class="agent-price-note" data-en="Cancel anytime — no long-term contract" data-es="Cancela cuando quieras — sin contrato a largo plazo">Cancel anytime — no long-term contract</div>
+        <a href="#contact" class="agent-cta" data-en="ADD THIS TO MY BUSINESS" data-es="AGREGAR A MI NEGOCIO">ADD THIS TO MY BUSINESS</a>
+      </div>
+      <div class="agent-right">
+        <ul class="agent-feature-list">
+          <li><span class="agent-feature-icon">✓</span><span><strong data-en="QR Digital Menu" data-es="Menú Digital QR">QR Digital Menu</strong> — <span data-en="customers scan and order in seconds, no app needed" data-es="los clientes escanean y ordenan en segundos, sin app">customers scan and order in seconds, no app needed</span></span></li>
+          <li><span class="agent-feature-icon">✓</span><span><strong data-en="Automatic loyalty rewards" data-es="Recompensas automáticas">Automatic loyalty rewards</strong> — <span data-en="repeat visits earn perks without staff doing anything" data-es="las visitas repetidas generan beneficios sin esfuerzo del personal">repeat visits earn perks without staff doing anything</span></span></li>
+          <li><span class="agent-feature-icon">✓</span><span><strong data-en="Smart re-engagement" data-es="Reactivación inteligente">Smart re-engagement</strong> — <span data-en="AI reaches out to past customers with offers that bring them back" data-es="la IA contacta a clientes pasados con ofertas que los hacen regresar">AI reaches out to past customers with offers that bring them back</span></span></li>
+          <li><span class="agent-feature-icon">✓</span><span><strong data-en="Always up to date" data-es="Siempre actualizado">Always up to date</strong> — <span data-en="update prices and items instantly, no reprinting menus" data-es="actualiza precios y platillos al instante, sin reimprimir menús">update prices and items instantly, no reprinting menus</span></span></li>
+          <li><span class="agent-feature-icon">✓</span><span><strong data-en="Multi-location ready" data-es="Listo para múltiples sucursales">Multi-location ready</strong> — <span data-en="manage all your restaurants from one place" data-es="administra todos tus restaurantes desde un solo lugar">manage all your restaurants from one place</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi-section" id="roi">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag" data-en="Return on Investment" data-es="Retorno de Inversión">Return on Investment</div>
+    <h2 class="section-title" data-en="You make your money back<br>with ONE new customer." data-es="Recuperas tu dinero<br>con UN solo cliente nuevo.">You make your money back<br>with ONE new customer.</h2>
+    <p class="section-sub" data-en="Everything after that is pure profit — and it works for you 24/7 forever." data-es="Todo después de eso es ganancia pura — y trabaja para ti 24/7 para siempre.">Everything after that is pure profit — and it works for you 24/7 forever.</p>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-card">
+      <div class="roi-icon">🍽️</div>
+      <div class="roi-business">Restaurant</div>
+      <div class="roi-extra">$1,000+</div>
+      <div class="roi-extra-label" data-en="extra revenue per month" data-es="ingreso extra por mes">extra revenue per month</div>
+      <div class="roi-multiplier">8X ROI</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-icon">🚚</div>
+      <div class="roi-business">Food Truck</div>
+      <div class="roi-extra">$800+</div>
+      <div class="roi-extra-label" data-en="extra revenue per month" data-es="ingreso extra por mes">extra revenue per month</div>
+      <div class="roi-multiplier">6X ROI</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-icon">🌮</div>
+      <div class="roi-business">Taqueria</div>
+      <div class="roi-extra">$900+</div>
+      <div class="roi-extra-label" data-en="extra revenue per month" data-es="ingreso extra por mes">extra revenue per month</div>
+      <div class="roi-multiplier">7X ROI</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-icon">🔁</div>
+      <div class="roi-business">With AI Loyalty Agent</div>
+      <div class="roi-extra">$1,500+</div>
+      <div class="roi-extra-label" data-en="extra revenue per month" data-es="ingreso extra por mes">extra revenue per month</div>
+      <div class="roi-multiplier">10X ROI</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-section">
+    <div class="about-visual">
+      <div class="about-initials">SG</div>
+      <div class="about-name">
+        <div class="about-name-text">SERGIO GIRARD</div>
+        <div class="about-name-sub">Founder, Guidepost Media · Fresno, CA</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-tag" data-en="About" data-es="Nosotros">About</div>
+      <h2 class="section-title" data-en="Local business<br>is our business." data-es="El negocio local<br>es nuestro negocio.">Local business<br>is our business.</h2>
+      <p style="font-size:0.95rem;color:var(--gray);line-height:1.8;margin-top:1rem;font-weight:300;" data-en="I'm Sergio, based in Fresno, CA. I help restaurants and food trucks across the Central Valley look premium on Google Maps and keep customers coming back — professional photos, 3D virtual tours, digital menus, and AI-powered loyalty tools." data-es="Soy Sergio, con base en Fresno, CA. Ayudo a restaurantes y food trucks en todo el Valle Central a verse premium en Google Maps y a que sus clientes regresen — fotos profesionales, tours virtuales 3D, menús digitales y herramientas de lealtad con IA.">I'm Sergio, based in Fresno, CA. I help restaurants and food trucks across the Central Valley look premium on Google Maps and keep customers coming back — professional photos, 3D virtual tours, digital menus, and AI-powered loyalty tools.</p>
+      <p style="font-size:0.95rem;color:var(--gray);line-height:1.8;margin-top:1rem;font-weight:300;" data-en="My mission is simple: every local restaurant deserves to look as good online as it does in person — and keep the customers it earns." data-es="Mi misión es simple: cada restaurante local merece verse tan bien en línea como en persona — y conservar a los clientes que se gana.">My mission is simple: every local restaurant deserves to look as good online as it does in person — and keep the customers it earns.</p>
+      <div class="about-tags">
+        <span class="about-tag">Fresno, CA</span>
+        <span class="about-tag">Visalia, CA</span>
+        <span class="about-tag">Central Valley</span>
+        <span class="about-tag">Google Maps</span>
+        <span class="about-tag">Digital Menus</span>
+        <span class="about-tag">AI Loyalty Agent</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-tag" data-en="Get Started" data-es="Comenzar">Get Started</div>
+    <h2 class="section-title" data-en="Ready to look<br>premium on Google?" data-es="¿Listo para verte<br>premium en Google?">Ready to look<br>premium on Google?</h2>
+    <p class="section-sub" data-en="Reach out and we'll schedule a visit to your business within 24 hours." data-es="Contáctanos y agendamos una visita a tu negocio en menos de 24 horas.">Reach out and we'll schedule a visit to your business within 24 hours.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📱</div>
+      <div class="contact-label" data-en="Call / Text / WhatsApp" data-es="Llama / Mensaje / WhatsApp">Call / Text / WhatsApp</div>
+      <div class="contact-value"><a href="tel:5595096856">(559) 509-6856</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📧</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value"><a href="mailto:guidepostmedia@gmail.com">guidepostmedia@gmail.com</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label" data-en="Service Area" data-es="Área de Servicio">Service Area</div>
+      <div class="contact-value" data-en="Fresno, Visalia & Central Valley" data-es="Fresno, Visalia y Valle Central">Fresno, Visalia & Central Valley</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📸</div>
+      <div class="contact-label">Instagram</div>
+      <div class="contact-value"><a href="https://instagram.com/guidepostmedia" target="_blank">@guidepostmedia</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Guidepost<span>Media</span></div>
+  <div class="footer-copy">© 2026 Guidepost Media · Fresno, CA · <span data-en="All rights reserved" data-es="Todos los derechos reservados">All rights reserved</span></div>
+</footer>
+
+<script>
+function showDemo(type) {
+  document.getElementById('demo-restaurant').style.display = type === 'restaurant' ? 'block' : 'none';
+  document.getElementById('demo-house').style.display = type === 'house' ? 'block' : 'none';
+  document.querySelectorAll('.demo-tab').forEach((t,i) => {
+    t.classList.toggle('active', (i === 0 && type === 'restaurant') || (i === 1 && type === 'house'));
+  });
+}
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    if (text) {
+      if (el.innerHTML.includes('<')) el.innerHTML = text;
+      else el.textContent = text;
+    }
+  });
+}
+</script>
+</body>
+</html>
