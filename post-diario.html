@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Guidepost Media — Publicación de hoy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1F1A; --chalk:#F2EFE6; --marigold:#E8A93B; --clay:#C1531B; --sage:#6B7A5E;
+    --line: rgba(242,239,230,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh;
+    background: radial-gradient(ellipse at top, rgba(242,239,230,0.05), transparent 60%), var(--ink);
+    color:var(--chalk); font-family:'Inter',sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:24px 16px 56px;
+  }
+  .ticket{
+    width:100%; max-width:420px;
+    background:rgba(242,239,230,0.03); border:1px solid var(--line); border-radius:18px; overflow:hidden;
+  }
+  .stub{ padding:22px 24px 18px; border-bottom:1px dashed var(--line); position:relative; }
+  .stub::before, .stub::after{ content:""; position:absolute; bottom:-9px; width:18px; height:18px; background:var(--ink); border-radius:50%; }
+  .stub::before{ left:-9px; } .stub::after{ right:-9px; }
+  .eyebrow{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--marigold); font-weight:600; margin:0 0 6px; }
+  h1{ font-family:'Permanent Marker',cursive; font-weight:400; font-size:26px; line-height:1.2; margin:0 0 4px; }
+  .date{ font-size:13px; color:rgba(242,239,230,0.6); margin:8px 0 0; }
+
+  form{ padding:24px; }
+  .field{ margin-bottom:18px; }
+  label{ display:block; font-size:13px; font-weight:600; margin-bottom:8px; color:rgba(242,239,230,0.85); }
+  select, input[type="text"], textarea{
+    width:100%; background:rgba(242,239,230,0.05); border:1px solid var(--line); border-radius:10px;
+    color:var(--chalk); font-family:'Inter',sans-serif; font-size:15px; padding:11px 13px;
+  }
+  select option{ background:var(--ink); }
+  select:focus, input:focus, textarea:focus{ outline:none; border-color:var(--marigold); }
+  textarea{ resize:vertical; min-height:90px; }
+  textarea::placeholder, input::placeholder{ color:rgba(242,239,230,0.35); }
+
+  .photo-input{
+    border:1.5px dashed var(--line); border-radius:12px; padding:18px; text-align:center;
+    cursor:pointer; position:relative; transition:border-color .15s;
+  }
+  .photo-input:hover{ border-color:var(--marigold); }
+  .photo-input input{ position:absolute; inset:0; opacity:0; cursor:pointer; }
+  .photo-input .hint{ font-size:13px; color:rgba(242,239,230,0.55); }
+  .preview{ margin-top:12px; border-radius:10px; overflow:hidden; max-height:220px; display:none; }
+  .preview img{ width:100%; display:block; }
+
+  #otroWrap{ display:none; margin-top:10px; }
+
+  button[type="submit"]{
+    width:100%; background:var(--marigold); color:var(--ink); border:none; border-radius:10px;
+    padding:14px; font-size:15px; font-weight:700; cursor:pointer;
+  }
+  button[type="submit"]:disabled{ opacity:.5; cursor:not-allowed; }
+  .status{ margin-top:14px; font-size:13px; text-align:center; min-height:18px; }
+  .status.error{ color:var(--clay); }
+
+  .success-screen{ display:none; padding:48px 24px; text-align:center; }
+  .success-screen .check{
+    width:56px; height:56px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:28px;
+  }
+  .success-screen h2{ font-family:'Permanent Marker',cursive; font-weight:400; font-size:24px; margin:0 0 8px; }
+  .success-screen p{ color:rgba(242,239,230,0.7); font-size:14px; line-height:1.5; margin:0; }
+</style>
+</head>
+<body>
+
+<div class="ticket">
+  <div id="formWrap">
+    <div class="stub">
+      <p class="eyebrow">Publicación de hoy</p>
+      <h1>Guidepost Media</h1>
+      <p class="date" id="todayDate"></p>
+    </div>
+
+    <!--
+      Formulario estático para que Netlify lo detecte en el build.
+      El envío real se hace por fetch() vía JS para mostrar la pantalla de éxito sin recargar.
+    -->
+    <form name="daily-post" method="POST" data-netlify="true" enctype="multipart/form-data" id="postForm">
+      <input type="hidden" name="form-name" value="daily-post" />
+
+      <div class="field">
+        <label>¿Cuál negocio eres?</label>
+        <select name="negocio" id="negocioSelect" required>
+          <option value="" disabled selected>Selecciona tu negocio</option>
+          <option value="El San Marcos">El San Marcos</option>
+          <option value="Lalo's Taqueria">Lalo's Taqueria</option>
+          <option value="Tacos El Chilango">Tacos El Chilango</option>
+          <option value="Oaxaca Restaurant">Oaxaca Restaurant</option>
+          <option value="Rosy's Mexican Restaurant">Rosy's Mexican Restaurant</option>
+          <option value="Chelita's Taquería">Chelita's Taquería</option>
+          <option value="Tacos El Palmar">Tacos El Palmar</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <div id="otroWrap">
+          <input type="text" name="negocio_otro" id="negocioOtro" placeholder="Escribe el nombre de tu negocio" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Foto de hoy</label>
+        <div class="photo-input">
+          <span class="hint" id="photoHint">Toca para tomar o subir una foto</span>
+          <input type="file" accept="image/*" capture="environment" id="photoInput" name="foto" required />
+        </div>
+        <div class="preview" id="preview"><img id="previewImg" /></div>
+      </div>
+
+      <div class="field">
+        <label>¿Qué quieres anunciar?</label>
+        <textarea name="descripcion" id="descInput" placeholder="Ej: Hoy estamos en el parque de la calle 5ta, especial de birria desde las 11am" required></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">Enviar publicación</button>
+      <div class="status" id="statusMsg"></div>
+    </form>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="check">✓</div>
+    <h2>¡Recibido!</h2>
+    <p>Tu publicación queda lista para salir hoy en redes y Google Maps.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('todayDate').textContent = new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
+
+const negocioSelect = document.getElementById('negocioSelect');
+const otroWrap = document.getElementById('otroWrap');
+const negocioOtro = document.getElementById('negocioOtro');
+negocioSelect.addEventListener('change', () => {
+  const isOtro = negocioSelect.value === 'Otro';
+  otroWrap.style.display = isOtro ? 'block' : 'none';
+  negocioOtro.required = isOtro;
+});
+
+const photoInput = document.getElementById('photoInput');
+let compressedBlob = null;
+
+photoInput.addEventListener('change', () => {
+  const file = photoInput.files[0];
+  if (!file) return;
+  document.getElementById('photoHint').textContent = file.name;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('previewImg').src = e.target.result;
+    document.getElementById('preview').style.display = 'block';
+
+    const img = new Image();
+    img.onload = () => {
+      const maxW = 1600;
+      const scale = Math.min(1, maxW / img.width);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(blob => { compressedBlob = blob; }, 'image/jpeg', 0.8);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('postForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = document.getElementById('submitBtn');
+  const statusEl = document.getElementById('statusMsg');
+
+  submitBtn.disabled = true;
+  statusEl.className = 'status';
+  statusEl.textContent = 'Enviando...';
+
+  try {
+    const form = document.getElementById('postForm');
+    const formData = new FormData(form);
+
+    // Reemplaza la foto original por la versión comprimida si ya está lista
+    if (compressedBlob) {
+      formData.set('foto', compressedBlob, 'foto.jpg');
+    }
+
+    const negocioFinal = negocioSelect.value === 'Otro' ? negocioOtro.value : negocioSelect.value;
+    formData.set('negocio', negocioFinal);
+
+    await fetch('/', { method: 'POST', body: formData });
+
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'block';
+  } catch (err) {
+    console.error(err);
+    statusEl.classList.add('error');
+    statusEl.textContent = 'Algo falló. Intenta otra vez o avísale a Sergio.';
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
